@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: complaint
+  datasource:
+    url: jdbc:postgresql://localhost:5432/complaint
+    username: postgres
+    password: ${"DB_PASSWORD"}
+  kafka:
+    bootstrap-servers: localhost:9092
