@@ -2,8 +2,18 @@ spring:
   application:
     name: complaint
   datasource:
-    url: jdbc:postgresql://localhost:5432/complaint
-    username: postgres
-    password: ${"DB_PASSWORD"}
+    url: jdbc:postgresql://aws-1-eu-west-1.pooler.supabase.com:5432/postgres
+    username: postgres.gfddlyeoxpmvjzptlvtd
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
   kafka:
     bootstrap-servers: localhost:9092
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
