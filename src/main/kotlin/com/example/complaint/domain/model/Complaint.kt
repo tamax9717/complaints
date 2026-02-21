@@ -9,7 +9,8 @@ data class Complaint(
     val description: String,
     val status: ComplaintStatus,
     val createdAt: Instant,
-    val updatedAt: Instant
+    val updatedAt: Instant,
+    val deletedAt: Instant? = null
 ) {
     init {
         require(description.isNotBlank()) { "description cannot be blank" }
@@ -21,6 +22,11 @@ data class Complaint(
         }
         return copy(status = newStatus, updatedAt = Instant.now())
     }
+    fun markedAsDeleted(): Complaint {
+        require(deletedAt == null) { "Complaint already deleted" }
+        return copy(deletedAt = Instant.now())
+    }
+    fun isDeleted(): Boolean = deletedAt != null
 
     companion object {
         fun create(
