@@ -22,7 +22,7 @@ data class Complaint(
         }
         return copy(status = newStatus, updatedAt = Instant.now())
     }
-    fun markedAsDeleted(): Complaint {
+    fun markAsDeleted(): Complaint {
         require(deletedAt == null) { "Complaint already deleted" }
         return copy(deletedAt = Instant.now())
     }

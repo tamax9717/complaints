@@ -5,4 +5,6 @@ import com.example.complaint.domain.model.Complaint
 interface ComplaintEventPublisher {
     fun publishComplaintSubmitted(complaint: Complaint)
     fun publishStatusChanged(complaint: Complaint, previousStatus: String)
+    fun publishComplaintDeleted(complaint: Complaint)
+    fun publishComplaintPermanentlyDeleted(complaint: Complaint)
 }

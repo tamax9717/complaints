@@ -1,10 +1,10 @@
 package com.example.complaint.domain.model
 
 sealed class ComplaintStatus {
-    object Submitted : ComplaintStatus()
-    object InProgress : ComplaintStatus()
-    object Resolved : ComplaintStatus()
-    object Closed : ComplaintStatus()
+    data object Submitted : ComplaintStatus()
+    data object InProgress : ComplaintStatus()
+    data object Resolved : ComplaintStatus()
+    data object Closed : ComplaintStatus()
 
     fun canTransitionTo(newStatus: ComplaintStatus): Boolean {
         return when (this) {
