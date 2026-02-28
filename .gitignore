@@ -40,5 +40,10 @@ out/
 .kotlin
 
 ### macOS ###
-
 .DS_Store
+
+### Logs ###
+*.log
+
+### Testcontainers ###
+.testcontainers.properties

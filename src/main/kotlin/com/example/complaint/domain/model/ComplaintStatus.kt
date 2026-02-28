@@ -16,3 +16,18 @@ sealed class ComplaintStatus {
 
     }
 }
+
+fun ComplaintStatus.toStatusString(): String = when (this) {
+    is ComplaintStatus.Submitted -> "SUBMITTED"
+    is ComplaintStatus.InProgress -> "IN_PROGRESS"
+    is ComplaintStatus.Resolved -> "RESOLVED"
+    is ComplaintStatus.Closed -> "CLOSED"
+}
+
+fun String.toComplaintStatus(): ComplaintStatus = when (this.uppercase()) {
+    "SUBMITTED" -> ComplaintStatus.Submitted
+    "IN_PROGRESS" -> ComplaintStatus.InProgress
+    "RESOLVED" -> ComplaintStatus.Resolved
+    "CLOSED" -> ComplaintStatus.Closed
+    else -> throw IllegalArgumentException("Unknown ComplaintStatus: $this")
+}
