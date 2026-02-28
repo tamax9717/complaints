@@ -15,10 +15,11 @@ data class Complaint(
     init {
         require(description.isNotBlank()) { "description cannot be blank" }
         require(orderId.isNotBlank()) { "orderId cannot be blank" }
+        require(customerId.isNotBlank()) { "customerId cannot be blank" }
     }
     fun updateStatus(newStatus: ComplaintStatus): Complaint {
         require(status.canTransitionTo(newStatus)){
-            "cannot transition to $newStatus from $status"
+            "cannot transition to ${newStatus.toStatusString()} from ${status.toStatusString()}"
         }
         return copy(status = newStatus, updatedAt = Instant.now())
     }
@@ -42,7 +43,8 @@ data class Complaint(
                 description = description,
                 status = ComplaintStatus.Submitted,
                 createdAt = now,
-                updatedAt = now
+                updatedAt = now,
+                deletedAt = null
             )
         }
     }
