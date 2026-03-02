@@ -2,25 +2,9 @@ package com.example.complaint.adapter.out.persistence
 
 import com.example.complaint.domain.model.Complaint
 import com.example.complaint.domain.model.ComplaintId
-import com.example.complaint.domain.model.ComplaintStatus
+import com.example.complaint.domain.model.toComplaintStatus
+import com.example.complaint.domain.model.toStatusString
 
-private fun String.toComplaintStatus(): ComplaintStatus {
-    return when (this) {
-        "SUBMITTED" -> ComplaintStatus.Submitted
-        "IN_PROGRESS" -> ComplaintStatus.InProgress
-        "RESOLVED" -> ComplaintStatus.Resolved
-        "CLOSED" -> ComplaintStatus.Closed
-        else -> throw IllegalArgumentException("Unknown complaint status $this")
-    }
-}
-private fun ComplaintStatus.toStatusString(): String {
-    return when (this) {
-        is ComplaintStatus.Submitted -> "SUBMITTED"
-        is ComplaintStatus.InProgress -> "IN_PROGRESS"
-        is ComplaintStatus.Resolved -> "RESOLVED"
-        is ComplaintStatus.Closed -> "CLOSED"
-    }
-}
 
 fun ComplaintJpaEntity.toDomain(): Complaint {
     return Complaint(
@@ -30,7 +14,8 @@ fun ComplaintJpaEntity.toDomain(): Complaint {
         description = this.description,
         status = this.status.toComplaintStatus(),
         createdAt = this.createdAt,
-        updatedAt = this.updatedAt
+        updatedAt = this.updatedAt,
+        deletedAt = this.deletedAt
     )
 }
 fun Complaint.toJpaEntity(): ComplaintJpaEntity {
@@ -41,7 +26,8 @@ fun Complaint.toJpaEntity(): ComplaintJpaEntity {
         description = this.description,
         status = this.status.toStatusString(),
         createdAt = this.createdAt,
-        updatedAt = this.updatedAt
+        updatedAt = this.updatedAt,
+        deletedAt = this.deletedAt
     )
 }
 

@@ -7,5 +7,7 @@ interface ComplaintRepository {
     fun save(complaint: Complaint): Complaint
     fun findById(complaintId: ComplaintId): Complaint?
     fun findByCustomer(customerId: String): List<Complaint>
+    fun findAll(): List<Complaint>
     fun delete(complaintId: ComplaintId)
+    fun findByIdIncludingDeleted(complaintId: ComplaintId): Complaint?
 }

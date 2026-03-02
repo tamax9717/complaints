@@ -28,5 +28,8 @@ class ComplaintJpaEntity(
     val createdAt: Instant,
 
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: Instant
+    val updatedAt: Instant,
+
+    @Column(name = "deleted_at")
+    val deletedAt: Instant? = null
 )

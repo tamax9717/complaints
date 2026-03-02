@@ -17,17 +17,23 @@ class ComplaintPersistenceAdapter(
     }
 
     override fun findById(complaintId: ComplaintId): Complaint? {
-        return jpaRepository.findById(complaintId.value)
-            .map { it.toDomain() }
-            .orElse(null)
+        return jpaRepository.findActiveById(complaintId.value)?.toDomain()
     }
 
     override fun findByCustomer(customerId: String): List<Complaint> {
-        return jpaRepository.findByCustomerId(customerId)
+        return jpaRepository.findActiveByCustomerId(customerId)
             .map { it.toDomain() }
     }
 
     override fun delete(complaintId: ComplaintId) {
-        jpaRepository.deleteById(complaintId.value)
+        return jpaRepository.deleteById(complaintId.value)
+    }
+
+    override fun findAll(): List<Complaint> {
+        return jpaRepository.findAllActive().map { it.toDomain() }
+    }
+
+    override fun findByIdIncludingDeleted(complaintId: ComplaintId): Complaint? {
+        return jpaRepository.findByIdIncludingDeleted(complaintId.value)?.toDomain()
     }
 }
