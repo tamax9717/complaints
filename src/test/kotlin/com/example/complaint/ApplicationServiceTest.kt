@@ -60,7 +60,7 @@ class ApplicationServiceTest {
         val result = service.updateStatus(command)
         assertEquals(ComplaintStatus.InProgress, result.status)
         verify {
-            eventPublisher.publishStatusChanged(any(), "Submitted")
+            eventPublisher.publishStatusChanged(any(), "SUBMITTED")
         }
     }
 }

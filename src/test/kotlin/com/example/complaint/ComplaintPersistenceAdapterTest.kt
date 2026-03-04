@@ -86,4 +86,17 @@ class ComplaintPersistenceAdapterTest {
         val complaints = adapter.findByCustomer(customerId)
         assertEquals(2, complaints.size)
     }
+
+    @Test
+    fun `should not return deleted complaint`() {
+        val complaint = Complaint.create(
+            orderId = "TestOrder-123",
+            customerId = "TestCustomer-123",
+            description = "Test description"
+        )
+        val saved = adapter.save(complaint)
+        adapter.save(saved.markAsDeleted())
+
+        assertNull(adapter.findById(saved.id))
+    }
 }
