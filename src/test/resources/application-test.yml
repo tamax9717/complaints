@@ -9,3 +9,5 @@ spring:
     show-sql: false
   flyway:
     enabled: true
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS:localhost:9092}
